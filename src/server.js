@@ -16,6 +16,8 @@ app.post('/', (req, res) => {
     res.send({message: 'ok'})
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+export const start = () => {
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
+}

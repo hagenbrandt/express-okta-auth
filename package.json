@@ -2,20 +2,20 @@
   "name": "express-okta-auth",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "src/index.js",
+  "author": "Hagen Brandt <hagen-brandt@web.de>",
+  "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir dist",
     "dev": "nodemon --exec npm run restart",
     "restart": "rimraf dist && npm run build && npm run start",
-    "start": "nodemon dist/server.js"
+    "start": "nodemon dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hagenbrandt/express-okta-auth.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/hagenbrandt/express-okta-auth/issues"
   },
