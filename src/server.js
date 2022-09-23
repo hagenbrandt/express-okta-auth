@@ -2,6 +2,7 @@ import express from 'express'
 import { json, urlencoded } from 'body-parser'
 import morgan from 'morgan'
 import cors from 'cors'
+import itemRouter from './resources/item/item.router'
 
 const app = express()
 const router = express.Router()
@@ -12,19 +13,7 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-router.get('/me', (req, res) => {
-  res.send({ me: 'hello' })
-})
-
-app.use('/api', router)
-
-app.get('/data', (req, res) => {
-  res.send({ message: 'hello' })
-})
-
-app.post('/data', (req, res) => {
-  res.send(req.body)
-})
+app.use('/api/item', itemRouter)
 
 export const start = () => {
   app.listen(port, () => {
