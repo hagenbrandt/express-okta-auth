@@ -1,8 +1,7 @@
-const express = require('express')
+import express from 'express'
+import { json, urlencoded } from 'body-parser'
+
 const app = express()
-const bodyParser = require('body-parser')
-const json = bodyParser.json
-const urlencoded = bodyParser.urlencoded
 const port = 3000
 
 app.use(json())
