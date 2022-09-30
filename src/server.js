@@ -3,9 +3,9 @@ import { json, urlencoded } from 'body-parser'
 import morgan from 'morgan'
 import cors from 'cors'
 import itemRouter from './resources/item/item.router'
+import { connect } from './utils/db'
 
 const app = express()
-const router = express.Router()
 const port = 3000
 
 app.use(cors())
@@ -16,7 +16,9 @@ app.use(morgan('dev'))
 app.use('/api/item', itemRouter)
 
 export const start = () => {
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+  connect().then(async () => {
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`)
+    })
   })
 }
