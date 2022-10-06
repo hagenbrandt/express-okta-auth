@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import { json, urlencoded } from 'body-parser'
 import morgan from 'morgan'
 import cors from 'cors'
@@ -12,6 +13,10 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
+
+app.use('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/index.html'))
+})
 
 app.use('/api/item', itemRouter)
 
