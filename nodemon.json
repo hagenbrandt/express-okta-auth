@@ -17,7 +17,10 @@
       "src/**/*.gql"
     ],
     "env": {
-      "NODE_ENV": "development"
+      "NODE_ENV": "development",
+      "MONGO_USER": "your-username",
+      "MONGO_PASSWORD": "your-password",
+      "MONGO_DB": "your-db-name"
     },
     "ext": "js,json,graphql"
   }
