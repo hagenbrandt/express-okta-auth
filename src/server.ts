@@ -22,7 +22,7 @@ import morgan from 'morgan'
 import express, { Express } from "express"
 import cors from "cors"
 require('dotenv').config()
-import recipeRoutes from "./routes"
+import recipeRoutes from './resources/recipe/recipe.router'
 import { connect } from "./utils/db"
 
 const app: Express = express()
@@ -33,7 +33,7 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
-app.use(recipeRoutes)
+app.use('/api/recipes', recipeRoutes)
 
 app.use('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))

@@ -6,11 +6,11 @@
   "author": "Hagen Brandt <hagen-brandt@web.de>",
   "license": "MIT",
   "scripts": {
-    "build:ts": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc",
     "dev": "nodemon --exec npm run restart",
     "restart": "rimraf dist && npm run build && npm run start",
     "start": "concurrently \"tsc -w\" \"nodemon dist/js/server.js\"",
-    "test": "jest --forceExit --detectOpenHandles  --silent",
+    "test": "jest --forceExit --detectOpenHandles  --silent"
   },
   "repository": {
     "type": "git",

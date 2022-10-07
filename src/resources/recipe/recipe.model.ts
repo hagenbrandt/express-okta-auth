@@ -1,4 +1,4 @@
-import { Recipe } from "../types/recipe";
+import { Recipe } from '../../types/recipe'
 import { model, Schema } from 'mongoose'
 
 const recipeSchema: Schema = new Schema(
@@ -18,4 +18,4 @@ const recipeSchema: Schema = new Schema(
     { timestamps: true }
 )
 
-export default model<Recipe>('Recipe', recipeSchema)
+export default model<Recipe>('recipe', recipeSchema)
