@@ -39,13 +39,15 @@ app.use('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))
 })
 
-connect()
-  .then(() =>
-    app.listen(PORT, () =>
-      console.log(`Server running on http://localhost:${PORT}`, process.env.DATABASE_URL)
-      
+export const start = () => {
+  connect()
+    .then(() =>
+      app.listen(PORT, () =>
+        console.log(`Server running on http://localhost:${PORT}`, process.env.DATABASE_URL)
+        
+      )
     )
-  )
-  .catch(error => {
-    throw error
-  })
+    .catch(error => {
+      throw error
+    })
+}

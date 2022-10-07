@@ -9,7 +9,7 @@
     "build": "rimraf dist && tsc",
     "dev": "nodemon --exec npm run restart",
     "restart": "rimraf dist && npm run build && npm run start",
-    "start": "concurrently \"tsc -w\" \"nodemon dist/js/server.js\"",
+    "start": "concurrently \"tsc -w\" \"nodemon dist/js/server/index.js\"",
     "test": "jest --forceExit --detectOpenHandles  --silent"
   },
   "repository": {
