@@ -1,7 +1,7 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose'
 
 export type Recipe = Document & {
-    title: string;
-    ingredients: object;
-    description: string[];
+  title: string
+  ingredients: object
+  description: string[]
 }
