@@ -16,9 +16,9 @@ const addRecipe = async (req: Request, res: Response): Promise<void> => {
         const body = req.body as Pick<Recipe, "title" | "ingredients" | "description">
 
         const newRecipe: Recipe = new RecipeModel({
-            title: 'new title',
-            ingredients: {oneCup: 'something'},
-            description: ['description text']
+            title: body.title,
+            ingredients: body.ingredients,
+            description: body.description
         })
 
         const recipeToSave: Recipe = await newRecipe.save()
