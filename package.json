@@ -10,8 +10,9 @@
     "build:server": "webpack --config ./config/webpack.config.server.js",
     "build:client": "webpack --config ./config/webpack.config.client.js",
     "dev": "nodemon --exec npm run restart",
+    "format": "prettier --write src/**/**/*.ts{,x}",
     "restart": "rimraf dist && npm run build && npm run start",
-    "start": "concurrently \"tsc -w\" \"nodemon dist/js/server/index.js\"",
+    "start": "concurrently \"tsc -w\" \"nodemon ./build/server.js\"",
     "test": "jest --forceExit --detectOpenHandles  --silent"
   },
   "repository": {
@@ -26,6 +27,7 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
+    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "mongodb": "^4.10.0",
     "mongoose": "^6.6.1",
@@ -49,6 +51,7 @@
     "@types/react-dom": "^18.0.6",
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^7.4.0",
+    "copy-webpack-plugin": "^11.0.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
