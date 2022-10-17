@@ -8,6 +8,7 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "build:server": "webpack --config ./config/webpack.config.server.js",
+    "build:client": "webpack --config ./config/webpack.config.client.js",
     "dev": "nodemon --exec npm run restart",
     "restart": "rimraf dist && npm run build && npm run start",
     "start": "concurrently \"tsc -w\" \"nodemon dist/js/server/index.js\"",
@@ -46,6 +47,7 @@
     "@types/node": "^18.8.3",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^7.4.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.23.1",
@@ -66,6 +68,7 @@
     "ts-loader": "^9.4.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
+    "webpack-manifest-plugin": "^5.0.0",
     "webpack-node-externals": "^3.0.0"
   },
   "jest": {
