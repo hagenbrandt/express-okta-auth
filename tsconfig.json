@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "outDir": "dist/js",
+      "lib": ["es6", "dom"],
+      "skipLibCheck": true,
+      "resolveJsonModule": true,
+      "rootDir": "src",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "jsx": "react",
+      "allowJs": true,
+      "strict": true,
+      "strictNullChecks": true,
+      "noImplicitAny": true,
+    },
+    "include": ["src/server/**/*"],
+    "exclude": ["src/types/*.ts", "node_modules", ".vscode"]
+  }
+  
