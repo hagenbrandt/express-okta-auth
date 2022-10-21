@@ -9,9 +9,9 @@ module.exports = {
   },
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, '../build/client'),
+    path: path.resolve(__dirname, '../build/server/static'),
     filename: '[name].[contenthash].js',
-    publicPath: path.resolve(__dirname, '../build/client'),
+    publicPath: './',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
