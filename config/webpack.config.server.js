@@ -9,8 +9,9 @@ module.exports = {
   },
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, '../build'),
+    path: path.resolve(__dirname, '../build/server'),
     filename: '[name].js',
+    publicPath: path.resolve(__dirname, '../build/server'),
   },
   resolve: {
     extensions: ['.ts', '.tsx'],

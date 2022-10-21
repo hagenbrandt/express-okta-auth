@@ -12,7 +12,7 @@
     "dev": "nodemon --exec npm run restart",
     "format": "prettier --write src/**/**/*.ts{,x}",
     "restart": "rimraf dist && npm run build && npm run start",
-    "start": "concurrently \"tsc -w\" \"nodemon ./build/server.js\"",
+    "start": "concurrently \"tsc -w\" \"nodemon ./build/server/server.js\"",
     "start:all": "npm run build:server && npm run build:client && npm run start",
     "test": "jest --forceExit --detectOpenHandles  --silent"
   },
