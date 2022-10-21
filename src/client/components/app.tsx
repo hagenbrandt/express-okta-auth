@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Form } from './Form'
 
 export const App = () => {
     const [data, setData] = useState(
@@ -13,26 +14,9 @@ export const App = () => {
 
 return (
     <>
-    <h1>Hello Frontend</h1>
-    <button onClick={postDataToDB}>Set data to database</button>
+        <h1>Hello Frontend</h1>
+        <Form />
+        {/* <button onClick={postDataToDB}>Set data to database</button> */}
     </>
 )
-
-async function postDataToDB() {
-    if (!data) {
-        console.log('No data');
-        return
-    }
-    console.log('data', data);
-    
-    await fetch('http://localhost:8080/api/recipes/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }).then((res) => res.json()).then((data) => {
-        console.log('Success:', data);
-    }).catch(console.error)
-}
 }
