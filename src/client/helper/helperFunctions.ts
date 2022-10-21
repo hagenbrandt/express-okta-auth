@@ -1,3 +1,6 @@
+import { Dispatch, SetStateAction } from 'react'
+import { Recipe } from '../../server/types/recipe'
+
 type PostRecipe = {
     title: string
     ingredients: object
@@ -17,5 +20,17 @@ export async function postDataToDB(data: PostRecipe) {
         body: JSON.stringify(data)
     }).then((res) => res.json()).then((data) => {
         console.log('Success:', data);
+    }).catch(console.error)
+}
+
+export async function getDataFromDBAndSetToState<Type>(setFetchToState: Dispatch<SetStateAction<Recipe[] | undefined>>) {
+    await fetch('http://localhost:8080/api/recipes/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then((res) => res.json()).then((data) => {
+        setFetchToState(data.recipes)
     }).catch(console.error)
 }
