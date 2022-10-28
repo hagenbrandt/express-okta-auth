@@ -1,5 +1,6 @@
 import React from 'react'
 import { Recipe } from '../../../server/types/recipe'
+import { deleteDataFromDB } from '../../helper/helperFunctions';
 
 type ListViewType = {recipes: Recipe[]}
 
@@ -13,6 +14,7 @@ export const ListView = (props: ListViewType) => {
                     {item.title}<br />
                     {getIngredients(item.ingredients)}<br />
                     {item.description[0]}
+                    <button type='button' value={item._id} onClick={handleClick}>Delete</button>
                     </li>
             })}
         </ul>
@@ -22,5 +24,11 @@ export const ListView = (props: ListViewType) => {
         return Object.entries(ingredients).map(([key, value]) => {
             return <span>{key}: {value}</span>
         })
+    }
+
+    async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+        if (event.currentTarget.value) {
+            await deleteDataFromDB(event.currentTarget.value).catch(console.error)
+        }
     }
 }
