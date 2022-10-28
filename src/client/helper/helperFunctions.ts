@@ -26,6 +26,25 @@ export async function postDataToDB(data: PostRecipe) {
     .catch(console.error)
 }
 
+export async function updateData(data: PostRecipe, id: string) {
+  if (!data) {
+    console.log('No data')
+    return
+  }
+  await fetch(`http://localhost:8080/api/recipes/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('Update:', data)
+    })
+    .catch(console.error)
+}
+
 export async function getDataFromDBAndSetToState<Type>(
   setFetchToState: Dispatch<SetStateAction<Recipe[] | undefined>>
 ) {
