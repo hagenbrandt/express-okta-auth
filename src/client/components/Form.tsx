@@ -35,24 +35,30 @@ export const Form = (props: RecipeProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="title">Title</label>
+      <label htmlFor="title" className='block text-sm font-medium text-gray-700'>Title</label>
       <input
         type="text"
         id="title"
+        className='block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
         placeholder={props.recipe && props.recipe.title}
         {...register('title')}
       />
-      <label htmlFor="ingredients">Ingredients</label>
-      <input type="text" id="ingredients" {...register('ingredients')} />
+      <label htmlFor="ingredients" className='block text-sm font-medium text-gray-700'>Ingredients</label>
+      <input 
+        type="text" 
+        id="ingredients" 
+        className='block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+        {...register('ingredients')} />
       <Controller
         name="description"
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <label htmlFor="description">
+          <label htmlFor="description" className='block text-sm font-medium text-gray-700'>
             Description
             <textarea
               id="description"
+              className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
               cols={30}
               rows={10}
               placeholder={props.recipe?.description[0]}
