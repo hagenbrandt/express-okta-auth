@@ -13,7 +13,7 @@ export const App = () => {
 
   return (
     <>
-      <h1>Hello Frontend</h1>
+      <h1 className='text-3xl font-bold'>Recipe collector</h1>
       <Form />
       <List />
       {/* <button onClick={postDataToDB}>Set data to database</button> */}
