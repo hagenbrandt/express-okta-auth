@@ -1,4 +1,3 @@
-// import express from 'express'
 import express, { Express } from 'express'
 import path from 'path'
 import fs from 'fs'
