@@ -1,6 +1,6 @@
+const webpack = require("webpack");
 const nodeExternals = require('webpack-node-externals')
 const path = require('path')
-const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   name: 'server',
@@ -22,9 +22,9 @@ module.exports = {
     __dirname: false,
   },
   plugins: [
-    new CopyPlugin({
-      patterns: [{ context: 'src/server', from: 'views', to: 'views' }, { context: 'src/server', from: 'static', to: 'static' }]
-    })
+    new webpack.DefinePlugin({
+      __isBrowser__: "true",
+    }),
   ],
   module: {
     rules: [

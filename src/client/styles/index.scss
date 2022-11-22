@@ -1,0 +1,25 @@
+$sinbad: #93CDD5;
+$carissma: #EA8EBB;
+$cotton: #FDF3EA;
+
+:root {
+    --background-light: #{$sinbad};
+    --background-dark: #{$carissma};
+
+    --main-color: #{$cotton};
+    // --main-background: linear-gradient(var(--background-dark) 25%, var(--background-light) 50%, var(--background-dark) 75%);
+    // --main-background: linear-gradient(#EA8EBB 25%, #93CDD5 50%, #EA8EBB 75%);
+    // --main-background: linear-gradient(63deg, var(--background-dark) 14%, var(--background-light) 57%, var(--background-dark) 91%);
+    --main-background: linear-gradient(63deg, var(--background-dark) 14%, var(--background-light) 80%);
+};
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background: var(--main-background);
+    color: var(--main-color);
+  }
