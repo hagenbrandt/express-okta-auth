@@ -11,117 +11,77 @@ type PostRecipe = {
 
 export async function createUser(data: User) {
   if (!data) {
-    console.error('No data')
-
-    return
+    return console.error('No data')
   }
 
-  await fetch('http://localhost:8080/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log('Created User from frontend', data)
-    })
-    .catch(console.error)
+  await axios
+          .post('http://localhost:8080/signup', {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            password: data.password,
+            id: data.id
+          })
+          .catch(console.error)
 }
 
 export async function loginUser(data: Pick<User, 'email' | 'password'>) {
   if (!data) {
-    console.error('No data')
-
-    return
+    return console.error('No data')
   }
 
-  await fetch('http://localhost:8080/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      localStorage.setItem('jwtToken', data.token)
-      localStorage.setItem('userID', data.user.id)
-      localStorage.setItem('userMail', data.user.email)
-      localStorage.setItem('userFirstName', data.user.firstName)
-      localStorage.setItem('userLastName', data.user.lastName)
-      localStorage.setItem('password', data.user.password)
+  await axios
+          .post('http://localhost:8080/login', {
+            email: data.email, 
+            password: data.password
+          })
+          .then((res) => {
+              localStorage.setItem('jwtToken', res.data.token)
+              localStorage.setItem('userID', res.data.user.id)
+              localStorage.setItem('userMail', res.data.user.email)
+              localStorage.setItem('userFirstName', res.data.user.firstName)
+              localStorage.setItem('userLastName', res.data.user.lastName)
+              localStorage.setItem('password', res.data.user.password)
 
-      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
-    })
-    .catch(console.error)
+              axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
+          })
+          .catch(console.error)
 }
 
 export async function postDataToDB(data: PostRecipe) {
   if (!data) {
-    console.log('No data')
-    return
+    return console.error('No data')
   }
-  await fetch('http://localhost:8080/api/recipes/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log('Success:', data)
-    })
-    .catch(console.error)
+  await axios
+          .post('http://localhost:8080/api/recipes/', {
+            title: data.title, 
+            ingredients: data.ingredients, 
+            description: data.description
+          })
+          .catch(console.error)
 }
 
 export async function updateData(data: PostRecipe, id: string) {
   if (!data) {
-    console.log('No data')
-    return
+    return console.error('No data')
   }
-  await fetch(`http://localhost:8080/api/recipes/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log('Update:', data)
-    })
-    .catch(console.error)
+
+  await axios
+          .put(`http:/localhost:8080/api/recipes/${id}`)
+          .catch(console.error)
 }
 
 export async function getDataFromDBAndSetToState<Type>(
   setFetchToState: Dispatch<SetStateAction<Recipe[] | undefined>>
 ) {
-  await fetch('http://localhost:8080/api/recipes/', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setFetchToState(data.recipes)
-    })
-    .catch(console.error)
+  await axios
+          .get('http://localhost:8080/api/recipes/')
+          .then(res => setFetchToState(res.data.recipes))
+          .catch(console.error)
 }
 
 export async function deleteDataFromDB(id: string) {
-  await fetch(`http://localhost:8080/api/recipes/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log('Delete: ', data)
-    })
-    .catch(console.error)
+  await axios
+          .delete(`http://localhost:8080/api/recipes/${id}`)
+          .catch(console.error)
 }
