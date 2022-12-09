@@ -16,6 +16,7 @@ import { App } from '../client/components/app'
 import { renderMarkupForSSR } from './resources/markupSSR/renderMarkupForSSR'
 import expressSession from './resources/services/session/expressSession'
 import { signin, signup } from './resources/services/authentication/auth'
+import responseStatus from './utils/responseStatus'
 
 const app: Express = express()
 
@@ -58,7 +59,7 @@ app.get('*', (req, res) => {
     return res.send(markup)
   }
 
-  return res.status(404).send('Page not found').end()
+  return res.status(responseStatus.notFound).send('Page not found').end()
 })
 
 export const start = () => {

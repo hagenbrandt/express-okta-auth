@@ -1,11 +1,12 @@
 import { Response, Request } from "express";
 import { Recipe } from "../../types/recipe";
+import responseStatus from "../../utils/responseStatus";
 import RecipeModel from './recipe.model'
 
 const getRecipes = async(req: Request, res: Response): Promise<void> => {
     try {
         const recipes: Recipe[] = await RecipeModel.find()
-        res.status(200).json({ recipes })
+        res.status(responseStatus.ok).json({ recipes })
     } catch (error) {
         throw error
     }
@@ -24,7 +25,7 @@ const addRecipe = async (req: Request, res: Response): Promise<void> => {
         const recipeToSave: Recipe = await newRecipe.save()
         const allRecipes: Recipe[] = await RecipeModel.find()
 
-        res.status(201).json({ message: 'Recipe added', recipe: recipeToSave, recipes: allRecipes })
+        res.status(responseStatus.created).json({ message: 'Recipe added', recipe: recipeToSave, recipes: allRecipes })
     } catch (error) {
         throw error
     }
@@ -44,7 +45,7 @@ const updateRecipe = async (req: Request, res: Response): Promise<void> => {
 
         const allRecipes: Recipe[] = await RecipeModel.find()
 
-        res.status(200).json({
+        res.status(responseStatus.ok).json({
             message: 'Recipe updated',
             recipe: updatedRecipe,
             recipes: allRecipes
@@ -62,7 +63,7 @@ const deleteRecipe = async (req: Request, res: Response): Promise<void> => {
 
         const allRecipes: Recipe[] = await RecipeModel.find()
 
-        res.status(200).json({
+        res.status(responseStatus.ok).json({
             message: 'Recipe deleted',
             recipe: deletedRecipe,
             recipes: allRecipes

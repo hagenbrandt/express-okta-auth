@@ -1,7 +1,8 @@
+import responseStatus from '../../utils/responseStatus'
 import User from './user.model'
 
 export const me = (req: any, res: any) => {
-  res.status(200).json({ data: req.user })
+  res.status(responseStatus.ok).json({ data: req.user })
 }
 
 export const updateMe = async (req: any, res: any) => {
@@ -12,9 +13,9 @@ export const updateMe = async (req: any, res: any) => {
       .lean()
       .exec()
 
-    res.status(200).json({ data: user })
+    res.status(responseStatus.ok).json({ data: user })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    res.status(responseStatus.badRequest).end()
   }
 }
