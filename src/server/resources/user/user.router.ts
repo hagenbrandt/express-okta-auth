@@ -1,10 +1,9 @@
-import { Router } from "express";
-import { createUser } from "./user.controller";
+import { Router } from 'express'
+import {me, updateMe }from './user.controller'
 
-const router: Router = Router()
+const router = Router()
 
-router
-    .route('/signup')
-    .post(createUser)
+router.get('/', me)
+router.put('/', updateMe)
 
 export default router

@@ -28,6 +28,10 @@ export const SignUp = () => {
                 Password
             </label>
             <input type="password" id="password" {...register('password')} />
+            <label htmlFor="id">
+                ID
+            </label>
+            <input type="text" id="id" {...register('id')} />
             <button>Submit</button>
         </form>
     )

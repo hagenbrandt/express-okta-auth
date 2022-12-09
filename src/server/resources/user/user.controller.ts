@@ -1,38 +1,20 @@
-import { Response, Request } from "express";
-import { User } from "../../../shared/types";
-import oktaClient from '../services/authentication/oktaClient';
+import User from './user.model'
 
-const createUser = async(req: Request, res: Response): Promise<void> => {
-    console.log('Called createUser');
-    
-    try {
-        const body = req.body as User
-        console.log('Req body: ', body);
-        console.log('orgUrl:', process.env.OKTA_ORG_URL);
-        console.log('token:', process.env.OKTA_TOKEN);
-            
-        
-        
-
-        await oktaClient.createUser({
-            profile: {
-                firstName: body.firstName,
-                lastName: body.lastName,
-                email: body.email,
-                login: body.email
-            },
-            credentials: {
-                password: {
-                    value: body.password
-                }
-            }
-        }).catch(console.error)
-
-        // res.status(200).json({ message: 'User Created' }).redirect('/')
-        res.status(302).json({ message: 'User created' }).redirect('/')
-    } catch(error) {
-        throw error
-    }
+export const me = (req: any, res: any) => {
+  res.status(200).json({ data: req.user })
 }
 
-export { createUser }
+export const updateMe = async (req: any, res: any) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.user._id, req.body, {
+      new: true
+    })
+      .lean()
+      .exec()
+
+    res.status(200).json({ data: user })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}

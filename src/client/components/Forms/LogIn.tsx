@@ -1,12 +1,9 @@
 import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
-import OktaAuth from '@okta/okta-auth-js';
-import { withAuth } from '@okta/okta-react';
+import { loginUser } from '../../helper/helperFunctions';
+import { User } from '../../../shared/types';
 
-export type LoginProps = {
-    username: string;
-    password: string;
-}
+export type LoginProps = Pick<User, 'email' | 'password'>
 
 export const LogIn = () => {
     const [sessionToken, setSessionToken] = useState(null)
@@ -15,18 +12,14 @@ export const LogIn = () => {
     const [password, setPassword] = useState('')
 
     const { register, handleSubmit } = useForm<LoginProps>()
-    const onSubmit = (data: LoginProps) => {
-        console.log(data);
-    }
-
-    // const oktaAuth = new OktaAuth({ url:  })
+    const onSubmit = (data: LoginProps) => {return loginUser(data)}
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="userName">
                 User Name
             </label>
-            <input type="text" id="userName" {...register('username')} />
+            <input type="text" id="userName" {...register('email')} />
             <label htmlFor="password">
                 Password
             </label>
@@ -35,7 +28,3 @@ export const LogIn = () => {
         </form>
     )
 }
-
-// export default withAuth(
-    
-// )

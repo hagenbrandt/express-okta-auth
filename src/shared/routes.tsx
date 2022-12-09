@@ -27,7 +27,6 @@ const routes: Route[] = [
     path: '/edit',
   },
   {
-    // component: <p>Under Constructions</p>,
     component: <SignUp />,
     isIndex: false,
     path: '/signup',

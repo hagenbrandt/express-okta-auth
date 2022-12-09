@@ -5,7 +5,6 @@ import morgan from 'morgan'
 import cors from 'cors'
 require('dotenv').config()
 import recipeRoutes from './resources/recipe/recipe.router'
-import userRoutes from './resources/user/user.router'
 import manifestPath from './resources/services/manifest/manifestPath'
 import { connect } from './utils/db'
 import React from 'react'
@@ -15,11 +14,8 @@ import { matchPath } from 'react-router-dom'
 import routes, { Route } from '../shared/routes'
 import { App } from '../client/components/app'
 import { renderMarkupForSSR } from './resources/markupSSR/renderMarkupForSSR'
-import oidcRouter from './resources/services/authentication/oidc'
 import expressSession from './resources/services/session/expressSession'
-import { createStore } from 'redux'
-import configureStore from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
+import { signin, signup } from './resources/services/authentication/auth'
 
 const app: Express = express()
 
@@ -30,10 +26,11 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 app.use('/api/recipes', recipeRoutes)
-app.use('/', userRoutes)
+app.post('/signup', signup)
+app.post('/signin', signin)
+app.post('/login', signin)
 
 app.use(expressSession)
-app.use(oidcRouter)
 
 app.use('/', express.static(path.join(__dirname, 'static')))
 
@@ -46,26 +43,18 @@ app.get('*', (req, res) => {
     req.url === '/' ||
     req.url === '/login' ||
     req.url === '/logout'
-  // const { userContext } = req as any;
-  // if (userContext) {
-  //   console.log(userContext.userinfo); 
-  // }
-  // const user = userContext ? userContext.userinfo : null
-  // const store = createStore({})
   const component = ReactDOMServer.renderToString(
     <StaticRouter location={req.url}>{React.createElement(App)}</StaticRouter>
-    // <StaticRouter location={req.url}>{ReactDOMServer.renderToString(<App />)}</StaticRouter>
   )
   const fontSrc = 'https://fonts.googleapis.com/css?family=Kanit'
   const markup = renderMarkupForSSR({
     title: 'Recipe Collector',
     scriptSrc: manifestPath,
     component: component,
-    fontSrc: fontSrc
+    fontSrc: fontSrc,
   })
 
   if (isRouteVerified) {
-    // res.render(markup, {name: 'Hagen'})
     return res.send(markup)
   }
 

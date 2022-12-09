@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { Recipe } from '../../server/types/recipe'
 import { User } from '../../shared/types'
+import axios from 'axios'
 
 type PostRecipe = {
   title: string
@@ -10,23 +11,50 @@ type PostRecipe = {
 
 export async function createUser(data: User) {
   if (!data) {
-    console.error('No data');
-    
+    console.error('No data')
+
     return
   }
-  console.log('Try to fetch');
-  
+
   await fetch('http://localhost:8080/signup', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log('Created User from frontend', data);
+      console.log('Created User from frontend', data)
+    })
+    .catch(console.error)
+}
+
+export async function loginUser(data: Pick<User, 'email' | 'password'>) {
+  if (!data) {
+    console.error('No data')
+
+    return
+  }
+
+  await fetch('http://localhost:8080/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
   })
+    .then((res) => res.json())
+    .then((data) => {
+      localStorage.setItem('jwtToken', data.token)
+      localStorage.setItem('userID', data.user.id)
+      localStorage.setItem('userMail', data.user.email)
+      localStorage.setItem('userFirstName', data.user.firstName)
+      localStorage.setItem('userLastName', data.user.lastName)
+      localStorage.setItem('password', data.user.password)
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
+    })
     .catch(console.error)
 }
 
