@@ -1,10 +1,11 @@
-import express, { Express, Request } from 'express'
+import express, { Express } from 'express'
 import path from 'path'
 import { json, urlencoded } from 'body-parser'
 import morgan from 'morgan'
 import cors from 'cors'
 require('dotenv').config()
 import recipeRoutes from './resources/recipe/recipe.router'
+import authRoutes from './resources/services/authentication/auth.router'
 import manifestPath from './resources/services/manifest/manifestPath'
 import { connect } from './utils/db'
 import React from 'react'
@@ -15,7 +16,6 @@ import routes, { Route } from '../shared/routes'
 import { App } from '../client/components/app'
 import { renderMarkupForSSR } from './resources/markupSSR/renderMarkupForSSR'
 import expressSession from './resources/services/session/expressSession'
-import { signin, signup } from './resources/services/authentication/auth'
 import responseStatus from './utils/responseStatus'
 
 const app: Express = express()
@@ -26,10 +26,8 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
+app.use('/', authRoutes)
 app.use('/api/recipes', recipeRoutes)
-app.post('/signup', signup)
-app.post('/signin', signin)
-app.post('/login', signin)
 
 app.use(expressSession)
 
