@@ -3,7 +3,6 @@ import path from 'path'
 import { json, urlencoded } from 'body-parser'
 import morgan from 'morgan'
 import cors from 'cors'
-require('dotenv').config()
 import recipeRoutes from './resources/recipe/recipe.router'
 import authRoutes from './resources/services/authentication/auth.router'
 import manifestPath from './resources/services/manifest/manifestPath'
@@ -17,10 +16,11 @@ import { App } from '../client/components/app'
 import { renderMarkupForSSR } from './resources/markupSSR/renderMarkupForSSR'
 import expressSession from './resources/services/session/expressSession'
 import responseStatus from './utils/responseStatus'
+import config from './config'
 
 const app: Express = express()
 
-const PORT: string | number = process.env.PORT || 4000
+const PORT: string | number = config.ports.apiPort || 4000
 
 app.use(cors())
 app.use(json())
