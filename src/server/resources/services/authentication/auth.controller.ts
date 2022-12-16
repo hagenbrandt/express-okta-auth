@@ -6,19 +6,23 @@ import responseStatus from '../../../utils/responseStatus'
 
 
 export const newToken = (user: User) => {
-    return jwt.sign({ id: user.id }, config.secrets.jwt, {
+    return jwt.sign({ id: user._id }, config.secrets.jwt, {
         expiresIn: config.secrets.jwtExp
     })
 }
 
-export const verifyToken = (token: any) => {
-    new Promise((resolve, reject) => {
-        jwt.verify(token, config.secrets.jwt, (err: any, payload: any) => {
-            if (err) return reject(err)
-
-            return resolve(payload)
-        })
-    })
+export const verifyToken = async (token: string) => {   
+    try {
+        return await jwt.verify(token, config.secrets.jwt, (error: any, payload: any) => {
+                if (error) {
+                    throw error
+                }
+    
+                return payload
+            })
+    } catch (error) {
+        throw error
+    }
 }
 
 export const signup = async(req: any, res: any) => {
@@ -71,18 +75,21 @@ export const protect = async(req: any, res: any, next: any) => {
         return res.status(responseStatus.unauthorized).send({ message: 'no auth' })
     }
 
-    let token = req.headers.authorization.split('Bearer ')[1]
+    const token = req.headers.authorization.split('Bearer ')[1]
     if (!token) {
         return res.status(responseStatus.unauthorized).send({ message: 'no auth token' })
     }
-
+    
     try {
         const payload = await verifyToken(token) as unknown as User
         const user = await UserModel.findById(payload.id).select('-password').lean().exec()
+        
         req.user = user
+        
         next()
     } catch (error) {
         console.error(error)
+        
         return res.status(responseStatus.unauthorized).send({ message: 'no auth' })
     }
 }
