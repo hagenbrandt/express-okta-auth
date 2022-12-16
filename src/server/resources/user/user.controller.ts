@@ -8,7 +8,7 @@ export const me = async (req: any, res: any) => {
 export const updateMe = async (req: any, res: any) => {
   try {
     const user = await User.findByIdAndUpdate(req.user._id, req.body, {
-      new: true
+      new: true,
     })
       .lean()
       .exec()

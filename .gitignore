@@ -4,3 +4,4 @@ dist
 build
 .okta.env
 keycloak-20.0.1
+.vscode

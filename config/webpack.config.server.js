@@ -1,4 +1,4 @@
-const webpack = require("webpack");
+const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const path = require('path')
 
@@ -23,7 +23,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: "true",
+      __isBrowser__: 'true',
     }),
   ],
   module: {

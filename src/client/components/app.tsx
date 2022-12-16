@@ -8,7 +8,7 @@ export const App = () => {
   const setIsClient = useDocumentStore((state) => state.setIsClient)
   setIsClient(typeof window !== 'undefined' && !!window.document)
   const jwtToken = getJwtFromCookie()
-  
+
   return (
     <>
       <h1 className="text-3xl font-bold">Recipe collector</h1>
@@ -19,7 +19,10 @@ export const App = () => {
 
   function getJwtFromCookie() {
     if (isClient) {
-      return window.document.cookie.split('; ').find(item => item.includes('jwtToken'))?.split('=')[1]
+      return window.document.cookie
+        .split('; ')
+        .find((item) => item.includes('jwtToken'))
+        ?.split('=')[1]
     }
   }
 }

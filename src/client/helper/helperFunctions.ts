@@ -10,9 +10,11 @@ type PostRecipe = {
 }
 
 export async function getUser(jwt: string) {
-  const config = { headers: {
-    Authorization: `Bearer ${jwt}`
-  }}
+  const config = {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
+  }
 
   await axios.get('http://localhost:8080/api/me/', config).catch(console.error)
 }
@@ -23,13 +25,13 @@ export async function createUser(data: FrontEndUser) {
   }
 
   await axios
-          .post('http://localhost:8080/signup', {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            password: data.password
-          })
-          .catch(console.error)
+    .post('http://localhost:8080/signup', {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    })
+    .catch(console.error)
 }
 
 export async function loginUser(data: Pick<User, 'email' | 'password'>) {
@@ -38,14 +40,14 @@ export async function loginUser(data: Pick<User, 'email' | 'password'>) {
   }
 
   await axios
-          .post('http://localhost:8080/login', {
-            email: data.email, 
-            password: data.password
-          })
-          .then((res) => {
-            document.cookie = `jwtToken=${res.data.token}`
-          })
-          .catch(console.error)
+    .post('http://localhost:8080/login', {
+      email: data.email,
+      password: data.password,
+    })
+    .then((res) => {
+      document.cookie = `jwtToken=${res.data.token}`
+    })
+    .catch(console.error)
 }
 
 export async function postDataToDB(data: PostRecipe) {
@@ -53,12 +55,12 @@ export async function postDataToDB(data: PostRecipe) {
     return console.error('No data')
   }
   await axios
-          .post('http://localhost:8080/api/recipes/', {
-            title: data.title, 
-            ingredients: data.ingredients, 
-            description: data.description
-          })
-          .catch(console.error)
+    .post('http://localhost:8080/api/recipes/', {
+      title: data.title,
+      ingredients: data.ingredients,
+      description: data.description,
+    })
+    .catch(console.error)
 }
 
 export async function updateData(data: PostRecipe, id: string) {
@@ -66,22 +68,20 @@ export async function updateData(data: PostRecipe, id: string) {
     return console.error('No data')
   }
 
-  await axios
-          .put(`http:/localhost:8080/api/recipes/${id}`)
-          .catch(console.error)
+  await axios.put(`http:/localhost:8080/api/recipes/${id}`).catch(console.error)
 }
 
 export async function getDataFromDBAndSetToState<Type>(
   setFetchToState: Dispatch<SetStateAction<Recipe[] | undefined>>
 ) {
   await axios
-          .get('http://localhost:8080/api/recipes/')
-          .then(res => setFetchToState(res.data.recipes))
-          .catch(console.error)
+    .get('http://localhost:8080/api/recipes/')
+    .then((res) => setFetchToState(res.data.recipes))
+    .catch(console.error)
 }
 
 export async function deleteDataFromDB(id: string) {
   await axios
-          .delete(`http://localhost:8080/api/recipes/${id}`)
-          .catch(console.error)
+    .delete(`http://localhost:8080/api/recipes/${id}`)
+    .catch(console.error)
 }

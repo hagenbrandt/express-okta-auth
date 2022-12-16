@@ -10,7 +10,7 @@
     "build:server": "webpack --config ./config/webpack.config.server.js",
     "build:client": "webpack --config ./config/webpack.config.client.js",
     "dev": "nodemon --exec npm run restart",
-    "format": "prettier --write src/**/**/*.ts{,x} && prettier --write src/**/*.ts{,x}",
+    "format": "prettier --write .",
     "restart": "rimraf dist && npm run build && npm run start",
     "start": "concurrently \"tsc -w\" \"nodemon ./build/server/server.js\"",
     "start:all": "npm run build:server && npm run build:client && npm run start",

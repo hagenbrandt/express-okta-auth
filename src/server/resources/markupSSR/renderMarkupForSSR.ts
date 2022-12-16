@@ -1,15 +1,22 @@
-import React from "react";
+import React from 'react'
 
 type MarkupParams = {
-    title: string;
-    scriptSrc: string;
-    component: React.ReactNode;
-    fontSrc?: string;
+  title: string
+  scriptSrc: string
+  component: React.ReactNode
+  fontSrc?: string
 }
 
-export const renderMarkupForSSR = ({title, scriptSrc, component, fontSrc}: MarkupParams) => {
-    const linkTagWithFont = fontSrc ? `<link rel="stylesheet" href="${fontSrc}" />` : '<></>'
-    return (
+export const renderMarkupForSSR = ({
+  title,
+  scriptSrc,
+  component,
+  fontSrc,
+}: MarkupParams) => {
+  const linkTagWithFont = fontSrc
+    ? `<link rel="stylesheet" href="${fontSrc}" />`
+    : '<></>'
+  return (
     '<!DOCTYPE html>' +
     '<html lang="en">' +
     '<head>' +
@@ -24,4 +31,5 @@ export const renderMarkupForSSR = ({title, scriptSrc, component, fontSrc}: Marku
     `<main id="root">${component}</main>` +
     '</body>' +
     '</html>'
-)}
+  )
+}

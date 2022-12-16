@@ -1,4 +1,4 @@
-const webpack = require("webpack");
+const webpack = require('webpack')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
@@ -29,15 +29,15 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
-      }
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(), 
+    new CleanWebpackPlugin(),
     new WebpackManifestPlugin(),
     new webpack.DefinePlugin({
-      __isBrowser__: "true",
+      __isBrowser__: 'true',
     }),
   ],
 }

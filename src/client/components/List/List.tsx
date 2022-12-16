@@ -5,16 +5,16 @@ import { useDocumentStore } from '../../store/documentStore'
 import { Recipe } from '../../../shared/types'
 
 export const List = () => {
-    const isClient = useDocumentStore((state) => state.isClient)   
-    const [recipes, setRecipes] = useState<Recipe[]>()
-    
-    useEffect(() => {
-        getDataFromDBAndSetToState<Recipe>(setRecipes)
-    },[])
+  const isClient = useDocumentStore((state) => state.isClient)
+  const [recipes, setRecipes] = useState<Recipe[]>()
 
-    if (!recipes || !isClient) {
-        return <></>
-    }
+  useEffect(() => {
+    getDataFromDBAndSetToState<Recipe>(setRecipes)
+  }, [])
 
-    return <ListView recipes={recipes} />
+  if (!recipes || !isClient) {
+    return <></>
+  }
+
+  return <ListView recipes={recipes} />
 }

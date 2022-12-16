@@ -6,8 +6,8 @@ const config = {
     jwtExp: '100d',
   },
   ports: {
-    apiPort: process.env.PORT
-  }
+    apiPort: process.env.PORT,
+  },
 }
 
 export default config
