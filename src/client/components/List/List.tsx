@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { getDataFromDBAndSetToState } from '../../helper/helperFunctions'
-import { Recipe } from '../../../server/types/recipe'
 import { ListView } from './ListView'
+import { useDocumentStore } from '../../store/documentStore'
+import { Recipe } from '../../../shared/types'
 
 export const List = () => {
-    const isClient = typeof window !== 'undefined' && !!window.document
+    const isClient = useDocumentStore((state) => state.isClient)   
     const [recipes, setRecipes] = useState<Recipe[]>()
     
     useEffect(() => {

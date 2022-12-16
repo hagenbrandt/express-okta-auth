@@ -1,9 +1,12 @@
 import React from 'react'
 import { getUser } from '../helper/helperFunctions'
 import { AppRouter } from '../router/router'
+import { useDocumentStore } from '../store/documentStore'
 
 export const App = () => {
-  const isClient = typeof window !== 'undefined' && !!window.document
+  const isClient = useDocumentStore((state) => state.isClient)
+  const setIsClient = useDocumentStore((state) => state.setIsClient)
+  setIsClient(typeof window !== 'undefined' && !!window.document)
   const jwtToken = getJwtFromCookie()
   
   return (
