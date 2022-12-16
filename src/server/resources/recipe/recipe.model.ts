@@ -1,5 +1,5 @@
-import { Recipe } from '../../types/recipe'
 import { model, Schema } from 'mongoose'
+import { Recipe } from '../../../shared/types'
 
 const recipeSchema: Schema = new Schema(
     {

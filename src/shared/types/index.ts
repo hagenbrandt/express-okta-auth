@@ -1,5 +1,11 @@
 import { Document } from 'mongoose'
 
+export type Recipe = Document & {
+  title: string
+  ingredients: object
+  description: string[]
+}
+
 export type User = Document & {
   firstName: string
   lastName: string

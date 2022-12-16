@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { Recipe } from "../../types/recipe";
+import { Recipe } from "../../../shared/types";
 import responseStatus from "../../utils/responseStatus";
 import RecipeModel from './recipe.model'
 

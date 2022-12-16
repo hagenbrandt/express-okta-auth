@@ -1,6 +1,6 @@
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Recipe } from '../../server/types/recipe'
+import { Recipe } from '../../shared/types'
 import { postDataToDB, updateData } from '../helper/helperFunctions'
 
 type RecipeForm = {

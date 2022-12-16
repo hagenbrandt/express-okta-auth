@@ -3,6 +3,8 @@ import UserModel from '../../user/user.model'
 import { User } from '../../../../shared/types'
 import config from '../../../config'
 import responseStatus from '../../../utils/responseStatus'
+import { Response } from 'express'
+import { LoginRequest } from '../../../types/requestTypes'
 
 
 export const newToken = (user: User) => {
@@ -42,8 +44,10 @@ export const signup = async(req: any, res: any) => {
     }
 }
 
-export const signin = async(req: any, res: any) => {
-    if (!req.body.email || !req.body.password) {
+// export const signin = async(req: any, res: any) => {
+// export const signin = async(req: Request & {body: {email: string, password: string}}, res: Response) => {
+export const signin = async(req: LoginRequest, res: Response) => {
+    if (!req?.body.email || !req.body.password) {
         return res.status(responseStatus.badRequest).send({ message: 'Email and password required' })
     }
 

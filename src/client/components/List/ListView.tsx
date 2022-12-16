@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Recipe } from '../../../server/types/recipe'
+import { Recipe } from '../../../shared/types';
 import { deleteDataFromDB } from '../../helper/helperFunctions';
 import { Form } from '../Form';
 

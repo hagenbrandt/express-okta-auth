@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { loginUser } from '../../helper/helperFunctions';
 import { User } from '../../../shared/types';
@@ -6,11 +6,6 @@ import { User } from '../../../shared/types';
 export type LoginProps = Pick<User, 'email' | 'password'>
 
 export const LogIn = () => {
-    const [sessionToken, setSessionToken] = useState(null)
-    const [error, setError] = useState(null)
-    const [userName, setUserName] = useState('')
-    const [password, setPassword] = useState('')
-
     const { register, handleSubmit } = useForm<LoginProps>()
     const onSubmit = (data: LoginProps) => {return loginUser(data)}
 

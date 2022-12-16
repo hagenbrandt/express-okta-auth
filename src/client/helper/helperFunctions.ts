@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { Recipe } from '../../server/types/recipe'
-import { User } from '../../shared/types'
+import { Recipe, User } from '../../shared/types'
 import axios from 'axios'
 import { FrontEndUser } from '../components/Forms/SignUp'
 
@@ -28,8 +27,7 @@ export async function createUser(data: FrontEndUser) {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email,
-            password: data.password,
-            id: data.id
+            password: data.password
           })
           .catch(console.error)
 }
