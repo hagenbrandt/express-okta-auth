@@ -1,7 +1,7 @@
 import responseStatus from '../../utils/responseStatus'
 import User from './user.model'
 
-export const me = (req: any, res: any) => {
+export const me = async (req: any, res: any) => {
   res.status(responseStatus.ok).json({ data: req.user })
 }
 

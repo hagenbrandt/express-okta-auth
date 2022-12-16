@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import recipeRoutes from './resources/recipe/recipe.router'
 import authRoutes from './resources/services/authentication/auth.router'
+import userRouter from './resources/user/user.router'
 import manifestPath from './resources/services/manifest/manifestPath'
 import { connect } from './utils/db'
 import React from 'react'
@@ -17,6 +18,7 @@ import { renderMarkupForSSR } from './resources/markupSSR/renderMarkupForSSR'
 import expressSession from './resources/services/session/expressSession'
 import responseStatus from './utils/responseStatus'
 import config from './config'
+import { protect } from './resources/services/authentication/auth.controller'
 
 const app: Express = express()
 
@@ -28,6 +30,7 @@ app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 app.use('/', authRoutes)
 app.use('/api/recipes', recipeRoutes)
+app.use('/api/me', protect, userRouter)
 
 app.use(expressSession)
 
