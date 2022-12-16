@@ -3,10 +3,15 @@ import { useForm } from "react-hook-form";
 import { User } from '../../../shared/types'
 import { createUser } from "../../helper/helperFunctions";
 
+export type FrontEndUser = Pick<User, 'firstName' |
+'lastName' |
+'email' |
+'password'
+>
+
 export const SignUp = () => {
-    const { control, register, handleSubmit } = useForm<User>()
-    const onSubmit = (data: User) => {
-        // console.log('Data: ', data);
+    const { register, handleSubmit } = useForm<FrontEndUser>()
+    const onSubmit = (data: FrontEndUser) => {
         return createUser(data);
     }
 
@@ -28,10 +33,6 @@ export const SignUp = () => {
                 Password
             </label>
             <input type="password" id="password" {...register('password')} />
-            <label htmlFor="id">
-                ID
-            </label>
-            <input type="text" id="id" {...register('id')} />
             <button>Submit</button>
         </form>
     )
