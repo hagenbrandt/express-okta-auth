@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { Recipe } from '../../server/types/recipe'
 import { User } from '../../shared/types'
 import axios from 'axios'
+import { FrontEndUser } from '../components/Forms/SignUp'
 
 type PostRecipe = {
   title: string
@@ -9,7 +10,15 @@ type PostRecipe = {
   description: string[]
 }
 
-export async function createUser(data: User) {
+export async function getUser(jwt: string) {
+  const config = { headers: {
+    Authorization: `Bearer ${jwt}`
+  }}
+
+  await axios.get('http://localhost:8080/api/me/', config).catch(console.error)
+}
+
+export async function createUser(data: FrontEndUser) {
   if (!data) {
     return console.error('No data')
   }
@@ -36,14 +45,7 @@ export async function loginUser(data: Pick<User, 'email' | 'password'>) {
             password: data.password
           })
           .then((res) => {
-              localStorage.setItem('jwtToken', res.data.token)
-              localStorage.setItem('userID', res.data.user.id)
-              localStorage.setItem('userMail', res.data.user.email)
-              localStorage.setItem('userFirstName', res.data.user.firstName)
-              localStorage.setItem('userLastName', res.data.user.lastName)
-              localStorage.setItem('password', res.data.user.password)
-
-              axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
+            document.cookie = `jwtToken=${res.data.token}`
           })
           .catch(console.error)
 }
