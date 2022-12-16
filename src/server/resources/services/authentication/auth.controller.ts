@@ -3,8 +3,8 @@ import UserModel from '../../user/user.model'
 import { User } from '../../../../shared/types'
 import config from '../../../config'
 import responseStatus from '../../../utils/responseStatus'
-import { Response } from 'express'
-import { LoginRequest } from '../../../types/requestTypes'
+import { Response, NextFunction } from 'express'
+import { AuthRequest, LoginRequest } from '../../../types/requestTypes'
 
 
 export const newToken = (user: User) => {
@@ -27,7 +27,7 @@ export const verifyToken = async (token: string) => {
     }
 }
 
-export const signup = async(req: any, res: any) => {
+export const signup = async(req: LoginRequest, res: Response) => {
     if (!req.body.email || !req.body.password) {
         return res.status(responseStatus.badRequest).send({ message: 'Email and password required' })
     }
@@ -44,8 +44,6 @@ export const signup = async(req: any, res: any) => {
     }
 }
 
-// export const signin = async(req: any, res: any) => {
-// export const signin = async(req: Request & {body: {email: string, password: string}}, res: Response) => {
 export const signin = async(req: LoginRequest, res: Response) => {
     if (!req?.body.email || !req.body.password) {
         return res.status(responseStatus.badRequest).send({ message: 'Email and password required' })
@@ -74,7 +72,7 @@ export const signin = async(req: LoginRequest, res: Response) => {
     }
 }
 
-export const protect = async(req: any, res: any, next: any) => {
+export const protect = async(req: AuthRequest, res: Response, next: NextFunction) => {
     if (!req.headers.authorization) {
         return res.status(responseStatus.unauthorized).send({ message: 'no auth' })
     }
