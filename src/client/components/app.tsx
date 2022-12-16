@@ -1,22 +1,28 @@
-import React, { useState } from 'react'
-import { Form } from './Form'
-import { List } from './List/List'
+import React from 'react'
+import { getUser } from '../helper/helperFunctions'
+import { AppRouter } from '../router/router'
+import { useDocumentStore } from '../store/documentStore'
 
 export const App = () => {
-  const [data, setData] = useState({
-    title: 'Very new title',
-    ingredients: {
-      oneCup: 'something',
-    },
-    description: ['a description text'],
-  })
+  const isClient = useDocumentStore((state) => state.isClient)
+  const setIsClient = useDocumentStore((state) => state.setIsClient)
+  setIsClient(typeof window !== 'undefined' && !!window.document)
+  const jwtToken = getJwtFromCookie()
 
   return (
     <>
-      <h1>Hello Frontend</h1>
-      <Form />
-      <List />
-      {/* <button onClick={postDataToDB}>Set data to database</button> */}
+      <h1 className="text-3xl font-bold">Recipe collector</h1>
+      <button onClick={() => getUser(jwtToken ?? '')}>Get User Data</button>
+      <AppRouter />
     </>
   )
+
+  function getJwtFromCookie() {
+    if (isClient) {
+      return window.document.cookie
+        .split('; ')
+        .find((item) => item.includes('jwtToken'))
+        ?.split('=')[1]
+    }
+  }
 }

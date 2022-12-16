@@ -5,23 +5,18 @@ dotenv.config()
 
 const messageContent = process.env.MONGODB_URL
 const controller = (req, res) => {
-    res.send({ message: messageContent })
+  res.send({ message: messageContent })
 }
 
 const router = Router()
 
 router
-    .route('/')
-    .get((req, res) => {
-        res.status(400).json({ message: 'hello' })
-    })
-    .post(controller)
+  .route('/')
+  .get((req, res) => {
+    res.status(400).json({ message: 'hello' })
+  })
+  .post(controller)
 
-router
-    .route('/:id')
-    .put(controller)
-    .delete(controller)
-    .get(controller)
-
+router.route('/:id').put(controller).delete(controller).get(controller)
 
 export default router

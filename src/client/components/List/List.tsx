@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { getDataFromDBAndSetToState } from '../../helper/helperFunctions'
-import { Recipe } from '../../../server/types/recipe'
 import { ListView } from './ListView'
+import { useDocumentStore } from '../../store/documentStore'
+import { Recipe } from '../../../shared/types'
 
 export const List = () => {
-    const [recipes, setRecipes] = useState<Recipe[]>()
-    
-    useEffect(() => {
-        getDataFromDBAndSetToState<Recipe>(setRecipes)
-    },[])
+  const isClient = useDocumentStore((state) => state.isClient)
+  const [recipes, setRecipes] = useState<Recipe[]>()
 
-    if (!recipes) {
-        return <></>
-    }
+  useEffect(() => {
+    getDataFromDBAndSetToState<Recipe>(setRecipes)
+  }, [])
 
-    return <ListView recipes={recipes} />
+  if (!recipes || !isClient) {
+    return <></>
+  }
+
+  return <ListView recipes={recipes} />
 }

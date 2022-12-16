@@ -1,27 +1,18 @@
 {
-    "restartable": "rs",
-    "ignore": [
-      ".git",
-      "node_modules/**/node_modules",
-      "dist"
-    ],
-    "verbose": true,
-    "execMap": {
-      "js": "node"
-    },
-    
-    "runOnChangeOnly": false,
-    "watch": [
-      "src/**/*.js",
-      "src/**/*.graphql",
-      "src/**/*.gql"
-    ],
-    "env": {
-      "NODE_ENV": "development",
-      "MONGO_USER": "your-username",
-      "MONGO_PASSWORD": "your-password",
-      "MONGO_DB": "your-db-name"
-    },
-    "ext": "js,json,graphql"
-  }
-  
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/**/node_modules", "dist"],
+  "verbose": true,
+  "execMap": {
+    "js": "node"
+  },
+
+  "runOnChangeOnly": false,
+  "watch": ["src/**/*.js", "src/**/*.graphql", "src/**/*.gql"],
+  "env": {
+    "NODE_ENV": "development",
+    "MONGO_USER": "your-username",
+    "MONGO_PASSWORD": "your-password",
+    "MONGO_DB": "your-db-name"
+  },
+  "ext": "js,json,graphql"
+}
