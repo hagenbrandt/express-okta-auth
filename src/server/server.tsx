@@ -19,10 +19,18 @@ import expressSession from './resources/services/session/expressSession'
 import responseStatus from './utils/responseStatus'
 import config from './config'
 import { protect } from './resources/services/authentication/auth.controller'
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('../../swagger.json')
 
 const app: Express = express()
 
 const PORT: string | number = config.ports.apiPort || 4000
+
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, { explorer: true })
+)
 
 app.use(cors())
 app.use(json())
