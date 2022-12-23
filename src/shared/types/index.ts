@@ -1,16 +1,29 @@
 import { Document } from 'mongoose'
 
+export type Ingredient = {
+  name: string
+  quantity: number
+  unit: string
+  alternative?: string[]
+}
+
 export type Recipe = Document & {
   title: string
-  ingredients: object
-  description: string[]
+  ingredients: Ingredient[]
+  description: string
+  isPublic: boolean
+  owner: number
+  cookingTime?: string
+  tags?: string[]
+  rating?: number[]
 }
 
 export type User = Document & {
-  firstName: string
-  lastName: string
+  userName: string
   email: string
   password: string
-  id: string
   checkPassword: (password: string) => Promise<boolean>
+  createdRecipes: number[]
+  bookMarked?: number[]
+  rated?: number[]
 }

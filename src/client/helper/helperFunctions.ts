@@ -26,8 +26,7 @@ export async function createUser(data: FrontEndUser) {
 
   await axios
     .post('http://localhost:8080/signup', {
-      firstName: data.firstName,
-      lastName: data.lastName,
+      userName: data.userName,
       email: data.email,
       password: data.password,
     })

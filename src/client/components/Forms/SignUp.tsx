@@ -3,10 +3,7 @@ import { useForm } from 'react-hook-form'
 import { User } from '../../../shared/types'
 import { createUser } from '../../helper/helperFunctions'
 
-export type FrontEndUser = Pick<
-  User,
-  'firstName' | 'lastName' | 'email' | 'password'
->
+export type FrontEndUser = Pick<User, 'userName' | 'email' | 'password'>
 
 export const SignUp = () => {
   const { register, handleSubmit } = useForm<FrontEndUser>()
@@ -16,10 +13,8 @@ export const SignUp = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="firstName">First Name</label>
-      <input type="text" id="firstName" {...register('firstName')} />
-      <label htmlFor="lastName">Last Name</label>
-      <input type="text" id="lastName" {...register('lastName')} />
+      <label htmlFor="userName">User-Name</label>
+      <input type="text" id="userName" {...register('userName')} />
       <label htmlFor="email">Email</label>
       <input type="email" id="email" {...register('email')} />
       <label htmlFor="password">Password</label>
