@@ -1,6 +1,6 @@
 pipeline {
     agent{
-        docker { image: 'node:16.17.1-alpine' }
+        docker { image 'node:16.17.1-alpine' }
     }
     stages {
         stage ('build') {
