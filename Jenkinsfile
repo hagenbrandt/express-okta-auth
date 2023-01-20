@@ -18,4 +18,9 @@ pipeline {
             }
         }
     }
+    post{
+        always {
+            emailext body: 'A Test Mail from Jenkins', recipientProviders: ['h.brandt@steinberg.de']
+        }
+    }
 }
