@@ -6,6 +6,7 @@ pipeline {
         stage ('build') {
             steps {
                 sh 'node --version'
+                junit 'reports/**/*.xml'
             }
         }
     }
