@@ -1,10 +1,10 @@
-import { Router } from 'express'
+import { Request, Response, Router } from 'express'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const messageContent = process.env.MONGODB_URL
-const controller = (req, res) => {
+const controller = (req: Request, res: Response) => {
   res.send({ message: messageContent })
 }
 
