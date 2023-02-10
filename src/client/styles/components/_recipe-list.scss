@@ -1,0 +1,21 @@
+.recipe-list {
+  color: var(--secondary-color);
+  width: 40vw;
+  max-width: 1200px;
+  padding: 0;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--secondary-color);
+    padding: 0 0 4px;
+    margin: 0 0 12px;
+
+    &__unit {
+      font-style: italic;
+      font-weight: 100;
+      opacity: 0.5;
+      margin: 0 4px 0;
+    }
+  }
+}
