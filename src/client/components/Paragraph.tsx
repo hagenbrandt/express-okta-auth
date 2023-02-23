@@ -2,14 +2,15 @@ import React from 'react'
 
 type ParagraphProps = {
   text: string
+  className?: string
 }
 
-const Paragraph = ({ text }: ParagraphProps) => {
+const Paragraph = ({ text, className }: ParagraphProps) => {
   if (!text.length) {
     return <></>
   }
 
-  return <p>{text}</p>
+  return <p className={className}>{text}</p>
 }
 
 export default Paragraph
