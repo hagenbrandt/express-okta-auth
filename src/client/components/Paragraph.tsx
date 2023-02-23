@@ -4,6 +4,12 @@ type ParagraphProps = {
   text: string
 }
 
-const Paragraph = ({ text }: ParagraphProps) => <p>{text}</p>
+const Paragraph = ({ text }: ParagraphProps) => {
+  if (!text.length) {
+    return <></>
+  }
+
+  return <p>{text}</p>
+}
 
 export default Paragraph

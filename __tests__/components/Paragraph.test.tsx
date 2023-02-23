@@ -12,7 +12,11 @@ describe('Paragraph', () => {
     expect(screen.getByText(text)).toBeInTheDocument()
   })
 
-  it.todo('returns empty container when no text is given')
+  it('returns empty container when no text is given', () => {
+    const { container } = render(<Paragraph text={''} />)
+
+    expect(container).toBeEmptyDOMElement()
+  })
   it.todo('has given className')
   it.todo('has no className when no className is given')
 })
