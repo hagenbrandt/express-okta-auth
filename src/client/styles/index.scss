@@ -26,4 +26,13 @@ body {
   font-family: 'Kanit', sans-serif;
   background: var(--main-background);
   color: var(--main-color);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  margin: 0;
+}
+
+form {
+  display: grid;
+  width: fit-content;
 }

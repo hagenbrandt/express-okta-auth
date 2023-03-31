@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction } from 'react'
-import { Recipe, User } from '../../shared/types'
+import { Ingredient, Recipe, User } from '../../shared/types'
 import axios from 'axios'
 import { FrontEndUser } from '../components/Forms/SignUp'
 
 type PostRecipe = {
   title: string
-  ingredients: object
-  description: string[]
+  ingredients: Ingredient[]
+  description: string
 }
 
 export async function getUser(jwt: string) {
@@ -26,7 +26,8 @@ export async function createUser(data: FrontEndUser) {
 
   await axios
     .post('http://localhost:8080/signup', {
-      userName: data.userName,
+      firstName: data.firstName,
+      lastName: data.lastName,
       email: data.email,
       password: data.password,
     })

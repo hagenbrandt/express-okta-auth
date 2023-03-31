@@ -19,11 +19,12 @@ export type Recipe = Document & {
 }
 
 export type User = Document & {
-  userName: string
+  firstName: string
+  lastName: string
   email: string
   password: string
   checkPassword: (password: string) => Promise<boolean>
-  createdRecipes: number[]
+  createdRecipes?: number[]
   bookMarked?: number[]
   rated?: number[]
 }
