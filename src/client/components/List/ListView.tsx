@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Recipe } from '../../../shared/types'
+import { Ingredient, Recipe } from '../../../shared/types'
 import { deleteDataFromDB } from '../../helper/helperFunctions'
 import { Form } from '../Form'
 
-type ListViewType = { recipes: Recipe[] }
-
-export const ListView = (props: ListViewType) => {
+export const ListView = ({ recipes }: { recipes: Recipe[] }) => {
   const [idForRecipeToUpdate, setIdForRecipeToUpdate] = useState<string>('')
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 
@@ -16,18 +14,20 @@ export const ListView = (props: ListViewType) => {
 
     return setIsModalVisible(false)
   }, [idForRecipeToUpdate, setIdForRecipeToUpdate])
+  console.log(recipes)
 
   return (
     <ul>
+      <li>Hagen</li>
       <Modal />
-      {props.recipes.map((item) => {
+      {recipes.map((item) => {
         return (
           <li>
             {item.title}
             <br />
             {getIngredients(item.ingredients)}
             <br />
-            {item.description[0]}
+            {item.description}
             <button
               type="button"
               value={item._id}
@@ -46,14 +46,24 @@ export const ListView = (props: ListViewType) => {
     </ul>
   )
 
-  function getIngredients(ingredients: object) {
-    return Object.entries(ingredients).map(([key, value]) => {
-      return (
-        <span>
-          {key}: {value}
-        </span>
-      )
-    })
+  function getIngredients(ingredients: Ingredient[]) {
+    console.log('Ingredients: ', ingredients)
+
+    return ingredients.map((item) => (
+      <span>
+        {item.name}
+        <br />
+        {item.quantity}: {item.unit}
+        <br />
+        {item.alternative ? (
+          <div>
+            <p>Alternatives: </p>`${item.alternative}`
+          </div>
+        ) : (
+          <></>
+        )}
+      </span>
+    ))
   }
 
   async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
@@ -64,7 +74,7 @@ export const ListView = (props: ListViewType) => {
 
   function Modal() {
     if (isModalVisible) {
-      const currentRecipe = props.recipes.find(
+      const currentRecipe = recipes.find(
         (item) => item._id === idForRecipeToUpdate
       )
       return (

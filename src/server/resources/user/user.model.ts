@@ -23,9 +23,17 @@ const userSchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    id: {
-      type: String,
-      required: true,
+    createdRecipes: {
+      type: Array,
+      required: false,
+    },
+    bookMarked: {
+      type: Array,
+      required: false,
+    },
+    rated: {
+      type: Array,
+      required: false,
     },
   },
   { timestamps: true }

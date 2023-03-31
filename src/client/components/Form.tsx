@@ -1,26 +1,40 @@
 import React from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { Recipe } from '../../shared/types'
+import { Controller, useFieldArray, useForm } from 'react-hook-form'
+import { Recipe, Ingredient } from '../../shared/types'
 import { postDataToDB, updateData } from '../helper/helperFunctions'
 
-type RecipeForm = {
-  title: string
-  ingredients: string
-  description: string
-}
+type RecipeForm = Pick<
+  Recipe,
+  | 'title'
+  | 'ingredients'
+  | 'description'
+  | 'isPublic'
+  | 'owner'
+  | 'cookingTime'
+  | 'tags'
+  | 'rating'
+>
 
 type RecipeProps = {
   recipe?: Recipe
 }
 
 export const Form = (props: RecipeProps) => {
-  const { control, register, handleSubmit } = useForm<RecipeForm>()
+  const { control, register, handleSubmit } = useForm<RecipeForm>({
+    defaultValues: {
+      ingredients: [defaultIngredient],
+    },
+  })
+  const { fields, append, prepend, remove } = useFieldArray({
+    name: 'ingredients',
+    control,
+  })
   const onSubmit = (data: RecipeForm) => {
     if (props) {
       const updatedRecipe = {
         title: data.title,
-        ingredients: { ingredients: [data.ingredients] },
-        description: [data.description],
+        ingredients: data.ingredients,
+        description: data.description,
       }
 
       return updateData(updatedRecipe, props.recipe?._id)
@@ -28,8 +42,8 @@ export const Form = (props: RecipeProps) => {
 
     return postDataToDB({
       title: data.title,
-      ingredients: { ingredients: [data.ingredients] },
-      description: [data.description],
+      ingredients: data.ingredients,
+      description: data.description,
     })
   }
 
@@ -48,18 +62,47 @@ export const Form = (props: RecipeProps) => {
         placeholder={props.recipe && props.recipe.title}
         {...register('title')}
       />
-      <label
-        htmlFor="ingredients"
-        className="block text-sm font-medium text-gray-700"
+      <h3>Ingredients</h3>
+      {fields.map((field, index) => {
+        return (
+          <section key={field.id}>
+            <input type="text" {...register(`ingredients.${index}.name`)} />
+            <input
+              type="number"
+              {...register(`ingredients.${index}.quantity`)}
+            />
+            <input type="text" {...register(`ingredients.${index}.unit`)} />
+            <input
+              type="text"
+              {...register(`ingredients.${index}.alternative`)}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                remove(index)
+              }}
+            >
+              Delete
+            </button>
+          </section>
+        )
+      })}
+      <button
+        type="button"
+        onClick={() => {
+          append(defaultIngredient)
+        }}
       >
-        Ingredients
-      </label>
-      <input
-        type="text"
-        id="ingredients"
-        className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-        {...register('ingredients')}
-      />
+        Append
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          prepend(defaultIngredient)
+        }}
+      >
+        Prepend
+      </button>
       <Controller
         name="description"
         control={control}
@@ -84,4 +127,11 @@ export const Form = (props: RecipeProps) => {
       <button type="submit">Submit</button>
     </form>
   )
+}
+
+export const defaultIngredient: Ingredient = {
+  name: '',
+  quantity: 0,
+  unit: '',
+  alternative: [''],
 }
