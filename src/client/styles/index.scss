@@ -1,6 +1,7 @@
 @import './components/button.scss';
 @import './components/headline';
 @import './components/recipe-list';
+@import './components/recipe-card';
 
 $sinbad: #93cdd5;
 $carissma: #ea8ebb;
@@ -45,4 +46,18 @@ form {
 
 li {
   list-style: none;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+}
+
+.st0 {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
 }

@@ -1,0 +1,43 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 12px;
+  width: fit-content;
+  padding: 24px 32px;
+
+  &__title {
+    margin: 0 0 20px;
+  }
+
+  &__image {
+    height: 100px;
+    width: auto;
+  }
+
+  &__overview-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    margin: 40px 0;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 12px;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+
+        svg {
+          margin: 0 4px 0 0;
+        }
+      }
+    }
+  }
+}
