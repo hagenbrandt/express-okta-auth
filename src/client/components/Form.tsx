@@ -35,6 +35,8 @@ export const Form = (props: RecipeProps) => {
         title: data.title,
         ingredients: data.ingredients,
         description: data.description,
+        isPublic: true,
+        owner: 'ObjectId("63939daf8896c19da6430e19")',
       }
 
       return updateData(updatedRecipe, props.recipe?._id)
@@ -44,6 +46,8 @@ export const Form = (props: RecipeProps) => {
       title: data.title,
       ingredients: data.ingredients,
       description: data.description,
+      isPublic: true,
+      owner: 'ObjectId("63939daf8896c19da6430e19")',
     })
   }
 
