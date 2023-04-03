@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof RecipeCardComponent> = (args) => (
 
 export const RecipeCard = Template.bind({})
 RecipeCard.args = {
-  headlineText: 'Example Recipe',
+  title: 'Example Recipe',
   ingredients: ['carrot', 'onion'],
-  buttonText: 'Submit',
+  buttonText: 'Show more',
 }
