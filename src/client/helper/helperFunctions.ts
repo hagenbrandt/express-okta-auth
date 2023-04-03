@@ -7,6 +7,11 @@ type PostRecipe = {
   title: string
   ingredients: Ingredient[]
   description: string
+  isPublic: boolean
+  owner: string
+  cookingTime?: string
+  tags?: string[]
+  rating?: number[]
 }
 
 export async function getUser(jwt: string) {
@@ -59,6 +64,11 @@ export async function postDataToDB(data: PostRecipe) {
       title: data.title,
       ingredients: data.ingredients,
       description: data.description,
+      isPublic: data.isPublic,
+      owner: data.owner,
+      cookingTime: data.cookingTime,
+      tags: data.tags,
+      rating: data.rating,
     })
     .catch(console.error)
 }
