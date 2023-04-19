@@ -1,6 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import RecipeCardComponent from '../client/components/RecipeCard'
+import { mockedRecipe } from '../mocks/mockedRecipe'
 
 export default {
   title: 'Components/Recipe Card',
@@ -13,7 +14,7 @@ const Template: ComponentStory<typeof RecipeCardComponent> = (args) => (
 
 export const RecipeCard = Template.bind({})
 RecipeCard.args = {
-  title: 'Example Recipe',
-  ingredients: ['carrot', 'onion'],
+  title: mockedRecipe.title,
+  ingredients: mockedRecipe.ingredients,
   buttonText: 'Show more',
 }
