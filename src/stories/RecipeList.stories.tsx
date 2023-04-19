@@ -1,6 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import RecipeListComponent from '../client/components/RecipeList'
+import { mockedRecipe } from '../mocks/mockedRecipe'
 
 export default {
   title: 'Components/Recipe List',
@@ -13,10 +14,5 @@ const Template: ComponentStory<typeof RecipeListComponent> = (args) => (
 
 export const RecipeList = Template.bind({})
 RecipeList.args = {
-  listItems: [
-    { unit: '1', ingredient: 'apple' },
-    { unit: '2 spoons', ingredient: 'sugar' },
-    { unit: 'a piece of', ingredient: 'banana' },
-    { unit: '150ml', ingredient: 'water' },
-  ],
+  recipes: [mockedRecipe, mockedRecipe, mockedRecipe],
 }

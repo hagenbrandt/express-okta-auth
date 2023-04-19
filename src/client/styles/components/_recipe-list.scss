@@ -1,6 +1,8 @@
 .recipe-list {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
   color: var(--secondary-color);
-  width: 40vw;
   max-width: 1200px;
   padding: 0;
 
