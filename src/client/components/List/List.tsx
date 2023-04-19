@@ -3,6 +3,7 @@ import { getDataFromDBAndSetToState } from '../../helper/helperFunctions'
 import { ListView } from './ListView'
 import { useDocumentStore } from '../../store/documentStore'
 import { Recipe } from '../../../shared/types'
+import RecipeList from '../RecipeList'
 
 export const List = () => {
   const isClient = useDocumentStore((state) => state.isClient)
@@ -16,5 +17,5 @@ export const List = () => {
     return <></>
   }
 
-  return <ListView recipes={recipes} />
+  return <RecipeList recipes={recipes} />
 }

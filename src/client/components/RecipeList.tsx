@@ -1,24 +1,20 @@
 import React from 'react'
+import { Recipe } from '../../shared/types'
+import RecipeCard from './RecipeCard'
 
-type Ingredient = {
-  unit: string
-  ingredient: string
-}
+const RecipeList = ({ recipes }: { recipes: Recipe[] }) => {
+  if (!recipes) {
+    return <h1>No recipes!</h1>
+  }
 
-type ListProps = {
-  listItems: Ingredient[]
-}
-
-const RecipeList = ({ listItems }: ListProps) => {
   return (
     <ul className="recipe-list">
-      {listItems.map((item) => (
-        <li className="recipe-list__item">
-          <span className="recipe-list__item__unit">{item.unit}</span>
-          <span className="recipe-list__item__ingredient">
-            {item.ingredient}
-          </span>
-        </li>
+      {recipes.map((item) => (
+        <RecipeCard
+          title={item.title}
+          ingredients={item.ingredients}
+          buttonText={'Show more'}
+        />
       ))}
     </ul>
   )
