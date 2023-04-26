@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Ingredient, Recipe } from '../../../shared/types'
 import { deleteDataFromDB } from '../../helper/helperFunctions'
-import { Form } from '../Form'
+import Form from '../Form'
 
 export const ListView = ({ recipes }: { recipes: Recipe[] }) => {
   const [idForRecipeToUpdate, setIdForRecipeToUpdate] = useState<string>('')
