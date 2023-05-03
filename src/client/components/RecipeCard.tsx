@@ -6,6 +6,7 @@ import MenuJapan from './Icons/MenuJapan'
 import { Recipe } from '../../shared/types'
 import Headline from './Headline'
 import Paragraph from './Paragraph'
+import TagList from './TagList/TagList'
 
 type RecipeCardProps = Pick<
   Recipe,
@@ -41,7 +42,10 @@ const RecipeCard = ({
           <Paragraph text="Ingredients" />
         </li>
       </ul>
-      <button type="button">{buttonText}</button>
+      {tags && <TagList tags={tags} />}
+      <button className="card__button" type="button">
+        {buttonText}
+      </button>
     </li>
   )
 }

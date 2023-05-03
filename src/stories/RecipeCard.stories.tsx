@@ -17,4 +17,5 @@ RecipeCard.args = {
   title: mockedRecipe.title,
   ingredients: mockedRecipe.ingredients,
   buttonText: 'Show more',
+  tags: ['vietnamese', 'christmas', 'veggie'],
 }
