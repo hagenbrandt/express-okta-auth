@@ -3,21 +3,21 @@
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
   color: var(--secondary-color);
-  max-width: 1200px;
+  max-width: var(--max-width-container);
   padding: 0;
 
   &__item {
     display: flex;
     justify-content: space-between;
     border-bottom: 0.5px solid var(--secondary-color);
-    padding: 0 0 4px;
-    margin: 0 0 12px;
+    padding: 0 0 var(--space-4);
+    margin: 0 0 var(--space-12);
 
     &__unit {
       font-style: italic;
       font-weight: 100;
       opacity: 0.5;
-      margin: 0 4px 0;
+      margin: 0 var(--space-4) 0;
     }
   }
 }
