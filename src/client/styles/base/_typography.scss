@@ -1,0 +1,26 @@
+:root {
+  --main-headline: clamp(40px, 12vw, 60px);
+  --secondary-headline: clamp(30px, 10vw, 40px);
+
+  --main-copy: clamp(18px, 8vw, 20px);
+}
+
+body {
+  font-family: 'Kanit', sans-serif;
+  color: var(--main-color);
+}
+
+h1 {
+  font-size: var(--main-headline);
+}
+
+h2 {
+  font-size: var(--secondary-headline);
+}
+
+p,
+label,
+span,
+button {
+  font-size: var(--main-copy);
+}
