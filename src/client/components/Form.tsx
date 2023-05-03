@@ -53,78 +53,113 @@ const Form = (props: RecipeProps) => {
 
   return (
     <section className="recipe-form">
-      <h1>Create recipe</h1>
+      <h1 className="recipe-form__headline">Create recipe</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label
-          htmlFor="title"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="title" className="recipe-form__label">
           Title
         </label>
         <input
           type="text"
           id="title"
-          className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="recipe-form__input"
           placeholder={props.recipe && props.recipe.title}
           {...register('title')}
         />
-        <h2>Ingredients</h2>
+        <h2 className="recipe-form__headline recipe-form__headline--secondary">
+          Ingredients
+        </h2>
         {fields.map((field, index) => {
           return (
-            <section key={field.id}>
-              <input type="text" {...register(`ingredients.${index}.name`)} />
-              <input
-                type="number"
-                {...register(`ingredients.${index}.quantity`)}
-              />
-              <input type="text" {...register(`ingredients.${index}.unit`)} />
-              <input
-                type="text"
-                {...register(`ingredients.${index}.alternative`)}
-              />
-              <button
-                className="recipe-form__button"
-                type="button"
-                onClick={() => {
-                  remove(index)
-                }}
+            <section
+              className="recipe-form__ingredients-wrapper"
+              key={field.id}
+            >
+              <label htmlFor="ingredient-name" className="recipe-form__label">
+                Ingredient
+                <input
+                  id="ingredient-name"
+                  className="recipe-form__input"
+                  type="text"
+                  {...register(`ingredients.${index}.name`)}
+                />
+              </label>
+              <label
+                htmlFor="ingredient-quantity"
+                className="recipe-form__label"
               >
-                Delete
-              </button>
+                Quantity
+                <input
+                  id="ingredient-quantity"
+                  className="recipe-form__input"
+                  type="number"
+                  {...register(`ingredients.${index}.quantity`)}
+                />
+              </label>
+              <label htmlFor="ingredient-unit" className="recipe-form__label">
+                Unit
+                <input
+                  id="ingredient-unit"
+                  className="recipe-form__input"
+                  type="text"
+                  {...register(`ingredients.${index}.unit`)}
+                />
+              </label>
+              <label
+                htmlFor="ingredient-alternative"
+                className="recipe-form__label"
+              >
+                Alternative
+                <input
+                  id="ingredient-alternative"
+                  className="recipe-form__input"
+                  type="text"
+                  {...register(`ingredients.${index}.alternative`)}
+                />
+              </label>
+              <div className="recipe-form__button-wrapper">
+                <button
+                  className="recipe-form__button"
+                  type="button"
+                  onClick={() => {
+                    remove(index)
+                  }}
+                >
+                  Remove Ingredient
+                </button>
+              </div>
             </section>
           )
         })}
-        <button
-          className="recipe-form__button"
-          type="button"
-          onClick={() => {
-            append(defaultIngredient)
-          }}
-        >
-          Append
-        </button>
-        <button
-          className="recipe-form__button"
-          type="button"
-          onClick={() => {
-            prepend(defaultIngredient)
-          }}
-        >
-          Prepend
-        </button>
+        <div className="recipe-form__button-wrapper">
+          <button
+            className="recipe-form__button"
+            type="button"
+            onClick={() => {
+              append(defaultIngredient)
+            }}
+          >
+            Append
+          </button>
+          <button
+            className="recipe-form__button"
+            type="button"
+            onClick={() => {
+              prepend(defaultIngredient)
+            }}
+          >
+            Prepend
+          </button>
+        </div>
         <Controller
           name="description"
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="description" className="recipe-form__label">
               Description
               <textarea
                 id="description"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="recipe-form__input recipe-form__input--textarea"
                 cols={30}
                 rows={10}
                 placeholder={props.recipe?.description[0]}
@@ -133,9 +168,11 @@ const Form = (props: RecipeProps) => {
             </label>
           )}
         />
-        <button type="submit" className="recipe-form__button">
-          Submit
-        </button>
+        <div className="recipe-form__button-wrapper">
+          <button type="submit" className="recipe-form__button">
+            Submit
+          </button>
+        </div>
       </form>
     </section>
   )
