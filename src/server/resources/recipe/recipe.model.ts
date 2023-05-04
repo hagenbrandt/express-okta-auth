@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import { model, Schema } from 'mongoose'
 import { Recipe } from '../../../shared/types'
 
@@ -10,10 +11,30 @@ const recipeSchema: Schema = new Schema(
       maxLength: 30,
     },
     ingredients: {
-      type: Object,
+      type: Array,
       required: true,
     },
-    description: Array,
+    description: { type: String, required: true },
+    isPublic: {
+      type: Boolean,
+      required: true,
+    },
+    owner: {
+      type: ObjectId,
+      required: true,
+    },
+    cookingTime: {
+      type: String,
+      required: false,
+    },
+    tags: {
+      type: Array,
+      required: false,
+    },
+    rating: {
+      type: Array,
+      required: false,
+    },
   },
   { timestamps: true }
 )

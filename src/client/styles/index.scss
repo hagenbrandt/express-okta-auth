@@ -1,15 +1,24 @@
+@import './components/button.scss';
+@import './components/form';
+@import './components/headline';
+@import './components/recipe-list';
+@import './components/recipe-card';
+@import './components/tag';
+@import './abstracts/borders';
+@import './base/typography';
+@import './components/tag-list';
+@import './abstracts/spaces';
+
 $sinbad: #93cdd5;
 $carissma: #ea8ebb;
 $cotton: #fdf3ea;
+$candy-apple: #a40000;
 
 :root {
   --background-light: #{$sinbad};
   --background-dark: #{$carissma};
-
   --main-color: #{$cotton};
-  // --main-background: linear-gradient(var(--background-dark) 25%, var(--background-light) 50%, var(--background-dark) 75%);
-  // --main-background: linear-gradient(#EA8EBB 25%, #93CDD5 50%, #EA8EBB 75%);
-  // --main-background: linear-gradient(63deg, var(--background-dark) 14%, var(--background-light) 57%, var(--background-dark) 91%);
+  --secondary-color: #{$candy-apple};
   --main-background: linear-gradient(
     63deg,
     var(--background-dark) 14%,
@@ -23,16 +32,32 @@ $cotton: #fdf3ea;
 }
 
 body {
-  font-family: 'Kanit', sans-serif;
   background: var(--main-background);
-  color: var(--main-color);
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   width: 100vw;
-  overflow: hidden;
   margin: 0;
 }
 
 form {
   display: grid;
   width: fit-content;
+}
+
+li {
+  list-style: none;
+}
+
+svg {
+  width: var(--space-24);
+  height: var(--space-24);
+}
+
+.st0 {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
 }
