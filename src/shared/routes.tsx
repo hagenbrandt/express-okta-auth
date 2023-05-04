@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from '../client/components/Form'
+import Form from '../client/components/Form'
 import { List } from '../client/components/List/List'
 import { LogIn } from '../client/components/Forms/LogIn'
 import { SignUp } from '../client/components/Forms/SignUp'
